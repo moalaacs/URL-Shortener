@@ -15,9 +15,9 @@
     <div class="row justify-content-center">
       <div class="col-10 col-md-8 col-lg-6 mt-5">
         <h2>URL Shrinker</h2>
-        <form action="" method="post" class="my-4 d-flex flex-row">
+        <form action="/shortUrls" method="post" class="my-4 d-flex flex-row">
           <label for=" url" class="visually-hidden">Your URL</label>
-          <input required type="url" name="url" id="url" placeholder="URL" class="form-control mx-3">
+          <input required type="url" name="fullUrl" id="fullUrl" placeholder="URL" class="form-control mx-3">
           <button type="submit" class="btn btn-success">Shrink</button>
         </form>
         <table class="table table-striped">
@@ -29,17 +29,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="https://www.google.com">https://www.google.com</a>
-              </td>
-              <td>
-                <a href="https://www.google.com">OZcTu80</a>
-              </td>
-              <td>
-                1
-              </td>
-            </tr>
+            <% shortUrls.forEach(shortUrl=>{ %>
+              <tr>
+                <td>
+                  <a href="<%= shortUrl.full %>">
+                    <%= shortUrl.full %>
+                  </a>
+                </td>
+                <td>
+                  <a href="<%= shortUrl.short %>">
+                    <%= shortUrl.short %>
+                  </a>
+                </td>
+                <td>
+                  <%= shortUrl.clicks %>
+                </td>
+              </tr>
+              <% }) %>
           </tbody>
         </table>
       </div>

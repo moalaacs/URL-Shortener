@@ -1,9 +1,33 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const shortUrl = require("./Models/shortUrl");
 const app = express();
 
 app.listen(process.env.PORT || 5000);
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  res.render("index");
+mongoose.set("strictQuery", true);
+mongoose.connect(
+  "mongodb://127.0.0.1/urlShortener",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("DB Connected Successfully");
+  }
+);
+
+
+app.get("/", async (req, res) => {
+  const shortUrls = await shortUrl.find();
+  res.render("index", { shortUrls: shortUrls });
+  console.log(shortUrls);
+});
+
+app.post("/shortUrls", async (req, res) => {
+  await shortUrl.create({ full: req.body.fullUrl });
+  console.log(req.body.fullUrl);
+  res.redirect("/");
 });
