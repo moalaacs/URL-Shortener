@@ -19,7 +19,6 @@ mongoose.connect(
   }
 );
 
-
 app.get("/", async (req, res) => {
   const shortUrls = await shortUrl.find();
   res.render("index", { shortUrls: shortUrls });
@@ -30,4 +29,14 @@ app.post("/shortUrls", async (req, res) => {
   await shortUrl.create({ full: req.body.fullUrl });
   console.log(req.body.fullUrl);
   res.redirect("/");
+});
+
+app.get("/:shortUrl", async (req, res) => {
+  const dbShortUrl = await shortUrl.findOne({ short: req.params.shortUrl });
+  if (dbShortUrl == null) {
+    return res.sendStatus(404);
+  }
+  dbShortUrl.clicks++;
+  dbShortUrl.save();
+  res.redirect(dbShortUrl.full);
 });
