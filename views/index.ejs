@@ -11,15 +11,15 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-10 col-md-8 col-lg-6 mt-5">
-        <h2>URL Shrinker</h2>
-        <form action="/shortUrls" method="post" class="my-4 d-flex flex-row">
-          <label for=" url" class="visually-hidden">Your URL</label>
-          <input required type="url" name="fullUrl" id="fullUrl" placeholder="URL" class="form-control">
-          <button type="submit" class="btn btn-success mx-3">Shrink</button>
-        </form>
+  <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="col-10 col-md-8 col-lg-6 shadow p-3 bg-white rounded">
+      <h2>URL Shrinker</h2>
+      <form action="/shortUrls" method="post" class="my-4 d-flex flex-row">
+        <label for=" url" class="visually-hidden">Your URL</label>
+        <input required type="url" name="fullUrl" id="fullUrl" placeholder="URL" class="form-control">
+        <button type="submit" class="btn btn-success ms-3">Shrink</button>
+      </form>
+      <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
